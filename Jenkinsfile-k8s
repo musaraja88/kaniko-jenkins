@@ -36,8 +36,8 @@ pipeline {
       steps {
         container(name: 'kaniko', shell: '/busybox/sh') {
           sh '''#!/busybox/sh
-            export DOCKER_USER="${DOCKER_USER}"
-            export DOCKER_PASS="${DOCKER_PASS}"
+//            export DOCKER_USER="${DOCKER_USER}"
+//            export DOCKER_PASS="${DOCKER_PASS}"
             /kaniko/executor --dockerfile `pwd`/Dockerfile --context `pwd` --destination=${IMAGE_NAME}:${IMAGE_TAG} --destination=${IMAGE_NAME}:latest
           '''
         }
