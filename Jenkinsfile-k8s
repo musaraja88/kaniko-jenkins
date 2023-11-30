@@ -12,8 +12,8 @@ pipeline {
 //        DOCKER_USER = "musaraja"
 //        DOCKER_PASS = 'dckr_pat_9V2ISK0P2q1oVDG_ac1klQOh4L0'
         DOCKER_CREDENTIALS = credentials('docker-cred')
-        DOCKER_USER = DOCKER_CREDENTIALS_USR
-        DOCKER_PASS = DOCKER_CREDENTIALS_PSW
+        DOCKER_USER = "${DOCKER_CREDENTIALS_USR}"
+        DOCKER_PASS = "${DOCKER_CREDENTIALS_PSW}"
         IMAGE_NAME = "${DOCKER_USER}" + "/" + "${APP_NAME}"
         IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
         /* JENKINS_API_TOKEN = credentials("JENKINS_API_TOKEN") */
