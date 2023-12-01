@@ -9,8 +9,8 @@ pipeline {
   environment {
         APP_NAME = "java-test"
         RELEASE = "1.0.0"
-//        DOCKER_USER = "musaraja"
-//        DOCKER_PASS = 'dckr_pat_9V2ISK0P2q1oVDG_ac1klQOh4L0'
+//        DOCKER_USER = "Docker username here"
+//        DOCKER_PASS = 'Docker token here'
         DOCKER_CREDENTIALS = credentials('docker-cred')
         DOCKER_USER = "${DOCKER_CREDENTIALS_USR}"
         DOCKER_PASS = "${DOCKER_CREDENTIALS_PSW}"
