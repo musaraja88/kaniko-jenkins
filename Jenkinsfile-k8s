@@ -38,6 +38,7 @@ pipeline {
     stage('Build & Push with Kaniko') {
       steps {
         container(name: 'kaniko', shell: '/busybox/sh') {
+          sh 'pwd'
           sh '''#!/busybox/sh
 //            export DOCKER_USER="${DOCKER_USER}"
 //            export DOCKER_PASS="${DOCKER_PASS}"
