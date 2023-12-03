@@ -16,7 +16,7 @@ pipeline {
         IMAGE_NAME = "${DOCKER_USER}" + "/" + "${APP_NAME}"
         IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
         SONARQUBE_SCANNER_HOME = tool 'SonarQubeScanner'
-        SONARQUBE_URL = "https://sonarqube.192.168.1.220.nip.io/"
+        SONARQUBE_SERVER_URL = 'https://sonarqube.192.168.1.220.nip.io/'
         SONARQUBE_TOKEN = credentials('sonar-token')
 
     }
@@ -42,7 +42,10 @@ pipeline {
         steps {
             script {
                 // Run SonarQube analysis using the automatically installed SonarQube Scanner
-                sh "${SONARQUBE_SCANNER_HOME}/bin/sonar-scanner"
+                //sh "${SONARQUBE_SCANNER_HOME}/bin/sonar-scanner"
+                withSonarQubeEnv('SonarQube') {
+                        sh "${SONARQUBE_SCANNER_HOME}/bin/sonar-scanner -Dsonar.host.url=${SONARQUBE_SERVER_URL} -Dsonar.login=${SONARQUBE_TOKEN}"
+                }
             }
         }
     }
