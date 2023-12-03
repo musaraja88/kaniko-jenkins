@@ -15,6 +15,7 @@ pipeline {
         DOCKER_PASS = "${DOCKER_CREDENTIALS_PSW}"
         IMAGE_NAME = "${DOCKER_USER}" + "/" + "${APP_NAME}"
         IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
+        SONARQUBE_SCANNER_HOME = tool 'SonarQubeScanner'
         SONARQUBE_URL = "https://sonarqube.192.168.1.220.nip.io/"
         SONARQUBE_TOKEN = credentials('sonar-token')
 
@@ -40,10 +41,8 @@ pipeline {
     stage('SonarQube Analysis') {
         steps {
             script {
-                def scannerHome = tool 'SonarQube Scanner'
-                withSonarQubeEnv('SonarQube') {
-                    sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=${APP_NAME} -Dsonar.projectName=${APP_NAME} -Dsonar.sources=src"
-                }
+                // Run SonarQube analysis using the automatically installed SonarQube Scanner
+                sh "${SONARQUBE_SCANNER_HOME}/bin/sonar-scanner"
             }
         }
     }
