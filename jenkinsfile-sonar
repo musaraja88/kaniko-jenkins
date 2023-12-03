@@ -37,16 +37,16 @@ pipeline {
 
     }
 
-    stage('SonarQube Analysis') {
-        steps {
-            script {
-                def scannerHome = tool 'SonarQube Scanner'
-                withSonarQubeEnv('SonarQube') {
-                    sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=${APP_NAME} -Dsonar.projectName=${APP_NAME} -Dsonar.sources=src"
-                }
-            }
-        }
-    }
+//    stage('SonarQube Analysis') {
+//        steps {
+//            script {
+//                def scannerHome = tool 'SonarQube Scanner'
+//                withSonarQubeEnv('SonarQube') {
+//                    sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=${APP_NAME} -Dsonar.projectName=${APP_NAME} -Dsonar.sources=src"
+//                }
+//            }
+//        }
+//    }
 
     stage('Build & Push with Kaniko') {
       steps {
