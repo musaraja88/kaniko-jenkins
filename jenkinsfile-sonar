@@ -31,6 +31,8 @@ pipeline {
     stage("Checkout from SCM"){
         steps {
             git branch: 'main', credentialsId: 'github', url: 'https://github.com/musaraja88/kaniko-jenkins'
+            sh 'pwd'
+            sh 'ls -lrt'
         }
 
     }
