@@ -23,6 +23,11 @@ pipeline {
 //        SONARQUBE_SERVER_URL = 'https://sonarqube.192.168.1.220.nip.io/'
         SONARQUBE_TOKEN = credentials('sonar-token')
         SONARQUBE_PROJECT_KEY = 'java-test'
+ // Adjust this to the actual source code location
+        SONARQUBE_SOURCES = 'src'
+ // Adjust this to the actual location of compiled classes
+        SONARQUBE_BINARIES = 'target/classes'
+
 
     }
 
@@ -49,7 +54,12 @@ pipeline {
                 // Run SonarQube analysis using the automatically installed SonarQube Scanner
                 //sh "${SONARQUBE_SCANNER_HOME}/bin/sonar-scanner"
                 withSonarQubeEnv('SonarQube') {
-                        sh "${SONARQUBE_SCANNER_HOME}/bin/sonar-scanner -Dsonar.host.url=${SONARQUBE_SERVER_URL} -Dsonar.login=${SONARQUBE_TOKEN} -Dsonar.projectKey=${SONARQUBE_PROJECT_KEY}"
+                        sh "${SONARQUBE_SCANNER_HOME}/bin/sonar-scanner " +
+                           "-Dsonar.host.url=${SONARQUBE_SERVER_URL} " +
+                           "-Dsonar.login=${SONARQUBE_TOKEN} " +
+                           "-Dsonar.projectKey=${SONARQUBE_PROJECT_KEY} " +
+                           "-Dsonar.sources=${SONARQUBE_SOURCES} " +
+                           "-Dsonar.java.binaries=${SONARQUBE_BINARIES}"
                 }
             }
         }
