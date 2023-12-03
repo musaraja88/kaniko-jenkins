@@ -16,7 +16,10 @@ pipeline {
         IMAGE_NAME = "${DOCKER_USER}" + "/" + "${APP_NAME}"
         IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
         SONARQUBE_SCANNER_HOME = tool 'SonarQubeScanner'
-        SONARQUBE_SERVER_URL = 'https://sonarqube.192.168.1.220.nip.io/'
+        SONARQUBE_SERVER_SERVICE_NAME = 'sonarqube'
+        SONARQUBE_SERVER_PORT = '80'
+        SONARQUBE_SERVER_URL = "http://${SONARQUBE_SERVER_SERVICE_NAME}:${SONARQUBE_SERVER_PORT}"
+#        SONARQUBE_SERVER_URL = 'https://sonarqube.192.168.1.220.nip.io/'
         SONARQUBE_TOKEN = credentials('sonar-token')
 
     }
